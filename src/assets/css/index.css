@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Ranchers&family=Roboto:wght@100&display=swap');
+@import 'weather.css';
+@import 'instruction.css';
+
+body {
+  background: radial-gradient(
+    circle,
+    rgb(140, 171, 255) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+
+  color: rgba(218, 237, 282, 1);
+  font-family: 'Arvo', serif;
+  margin: 0px 0px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.information {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.invisible {
+  display: none;
+}
+/* 
+#background {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.bg-img {
+  background-size: cover;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+} */

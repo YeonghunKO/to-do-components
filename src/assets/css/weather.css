@@ -1,0 +1,13 @@
+.weather {
+  text-shadow: 2px 2px 5px rgba(45, 52, 54, 1);
+}
+.weather__arrow,
+.weather__img {
+  width: 12vmin;
+  padding: 1vmin 1vmin;
+  cursor: pointer;
+  font-size: 2vmin;
+}
+
+/* 
+.inst */
