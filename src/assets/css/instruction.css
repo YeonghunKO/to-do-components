@@ -1,0 +1,55 @@
+.instruction__arrow,
+.instruction__img {
+  width: 12vmin;
+  padding: 1vmin 1vmin;
+  cursor: pointer;
+  font-size: 2vmin;
+}
+
+.instruction__arrow:hover {
+  cursor: pointer;
+}
+
+.instruction__btn {
+  background: transparent;
+  outline: none;
+  border: 1.5px solid white;
+  position: absolute;
+  top: 12vmin;
+  left: 4vmin;
+  width: 12vmin;
+  transform: rotateZ(0deg);
+  transform-origin: 0.9vmin;
+  border-radius: 0.9vmin;
+  transition: all 200ms linear;
+}
+
+.instruction__btn:hover {
+  cursor: pointer;
+  border-color: pink;
+  background-color: rgba(236, 240, 241, 1);
+}
+
+.instruction__btn.active {
+  background-color: rgba(236, 240, 241, 0.5);
+  font-weight: 900;
+  color: black;
+  border: none;
+  border-top: 0.5vmin solid rgba(255, 255, 255, 0.7);
+  border-bottom: 0.5vmin solid rgba(255, 255, 255, 0.7);
+  top: 10vmin;
+  left: 14vmin;
+  width: 8vmin;
+  height: 42vmin;
+  transform: rotateZ(-90deg);
+  transform-origin: top left;
+}
+
+.instruction__box.active {
+  display: grid;
+  grid-template-columns: 40vmin;
+  grid-template-rows: repeat(2, 4vmin);
+  justify-content: center;
+  font-size: 2vmin;
+  transform: rotateZ(90deg);
+}
