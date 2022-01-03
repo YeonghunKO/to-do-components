@@ -24,7 +24,8 @@
   transition: all 200ms linear;
 }
 
-.instruction__btn:hover {
+.instruction__btn:hover,
+.instruction__btn.active:hover {
   cursor: pointer;
   border-color: pink;
   background-color: rgba(236, 240, 241, 1);
