@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Ranchers&family=Roboto:wght@100&display=swap');
 @import 'weather.css';
 @import 'instruction.css';
+@import 'list.css';
 
 body {
   background: radial-gradient(
     circle,
-    rgb(140, 171, 255) 0%,
-    rgba(148, 187, 233, 1) 100%
+    rgb(231, 232, 241) -83%,
+    rgb(127, 107, 184) 92%,
+    rgb(81, 48, 114) 173%
   );
 
-  color: rgba(218, 237, 282, 1);
+  color: black;
   font-family: 'Arvo', serif;
   margin: 0px 0px;
 }
@@ -18,10 +20,47 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+input {
+  outline: none;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+}
+
 .information {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock {
+  font-size: 34px;
+}
+
+.clock h1 {
+  margin: 0;
+}
+
+.name {
+  font-size: 50px;
+  margin: 20px;
+}
+
+.progress {
+  text-align: center;
+  margin: 15px;
+}
+
+#progress-bar {
+  height: 36px;
+  width: 15em;
 }
 
 .invisible {
