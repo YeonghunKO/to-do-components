@@ -1,5 +1,8 @@
-class App {
-  constructor() {}
+import Toggle from './components/toggle.js';
+export default class App {
+  constructor($target) {
+    Toggle();
+  }
 }
 
 /* 
@@ -27,7 +30,7 @@ class App {
   </div>
 
   <section class="list">
-  
+
     <div>
       <h3>PENDING</h3>
       <ul id="pending-list">
