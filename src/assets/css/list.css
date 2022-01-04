@@ -1,0 +1,65 @@
+.list {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 42px;
+}
+
+.list li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list > div:first-child {
+  margin: 0px 11px;
+}
+
+.list > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 6fr;
+  grid-auto-rows: 1fr;
+}
+
+.list ul {
+  border-radius: 5px;
+  background: rgba(224, 228, 230, 0.6);
+  list-style: none;
+  padding: 2vmin;
+}
+
+.list h3 {
+  text-align: center;
+  font-size: 5vmin;
+  margin: 8px 0px;
+}
+
+.list ul span {
+  padding-right: 7px;
+  font-size: 3vmin;
+  font-weight: 200;
+}
+
+.list ul button {
+  background: transparent;
+  border: none;
+  font-size: 2.5vmin;
+  padding: 0;
+}
+
+.list ul i:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.list div:nth-of-type(2) {
+  margin: 0px 11px;
+}
+
+@media screen and (max-width: 600px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
+  }
+}
