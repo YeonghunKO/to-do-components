@@ -3,8 +3,9 @@ import { selector } from '../utils/selector.js';
 import { getItem, setItem } from '../utils/storage.js';
 
 export default function Greeting($target) {
+  let name;
   const render = () => {
-    const name = getItem('name');
+    name = getItem('name');
     if (name) {
       $target.appendChild(greetingResTemp());
       const $h4 = selector('.name');
@@ -31,11 +32,13 @@ export default function Greeting($target) {
   const $form = selector('.form');
   const $input = selector('.form__input');
 
-  $form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = $input.value;
-    $h4.innerHTML = `${greetWord()} ${name} 님`;
-    $form.classList.add('invisible');
-    setItem('name', name);
-  });
+  if (!name) {
+    $form.addEventListener('submit', e => {
+      e.preventDefault();
+      name = $input.value;
+      $h4.innerHTML = `${greetWord()} ${name} 님`;
+      $form.classList.add('invisible');
+      setItem('name', name);
+    });
+  }
 }

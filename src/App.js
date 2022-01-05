@@ -4,23 +4,33 @@ import Greeting from './components/greeting.js';
 
 export default class App {
   constructor($target) {
+    this.state = {
+      pending: [],
+      finished: [],
+      count: 0,
+    };
     Toggle();
     Clock($target);
     Greeting($target);
   }
+
+  onDelete = () => {
+    console.log('delete');
+  };
+  onFinished = () => {
+    console.log('onFinished');
+  };
+  onPending = () => {
+    console.log('onPending');
+  };
+
+  setState = nextState => {
+    this.state = nextState;
+  };
 }
 
 /* 
- <div class="clock">
-  <h1>00:00</h1>
- </div>
-
-  <form action="" class="form">
-    <input type="text" class="form__input" placeholder="Enter your name" />
-  </form>
-
-  <h4 class="name">Yeong</h4>
-
+ 
   <form action="" class="todo-form">
     <input
       type="text"

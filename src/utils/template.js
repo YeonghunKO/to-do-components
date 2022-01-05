@@ -26,7 +26,7 @@ const weatherIconTemp = weatherIcon => {
 const clockTemp = () => {
   const $div = createEle({ eleType: 'div', classes: ['clock-container'] });
   $div.innerHTML = `
-    <h1 class="clock-container__clock">00:00</h1>
+    <h1 class="clock-container__clock"></h1>
     `;
   return $div;
 };
@@ -34,7 +34,7 @@ const clockTemp = () => {
 const greetingTemp = () => {
   const $form = createEle({ eleType: 'form', classes: ['form'] });
   $form.innerHTML = `
-    <input type="text" class="form__input" placeholder="Enter your name" />
+    <input type="text" class="form__input" placeholder="이름을 입력하세요" />
     `;
   return $form;
 };
@@ -43,5 +43,7 @@ const greetingResTemp = () => {
   const $h4 = createEle({ eleType: 'h4', classes: ['name'] });
   return $h4;
 };
+
+const todoInputTemp = () => {};
 
 export { weatherIconTemp, clockTemp, greetingTemp, greetingResTemp };
