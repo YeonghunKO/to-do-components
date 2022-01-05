@@ -1,7 +1,10 @@
 import Toggle from './components/toggle.js';
+import Clock from './components/clock.js';
+
 export default class App {
   constructor($target) {
     Toggle();
+    Clock($target);
   }
 }
 
