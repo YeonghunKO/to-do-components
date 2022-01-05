@@ -44,6 +44,35 @@ const greetingResTemp = () => {
   return $h4;
 };
 
-const todoInputTemp = () => {};
+const todoInputTemp = () => {
+  const $todoForm = createEle({ eleType: 'form', classes: ['todo-form'] });
 
-export { weatherIconTemp, clockTemp, greetingTemp, greetingResTemp };
+  $todoForm.innerHTML = `
+    <input
+    type="text"
+    class="todo-form__input"
+    placeholder="Enter your tasks"
+    />
+  `;
+
+  return $todoForm;
+};
+
+const progressTemp = () => {
+  const $progress = createEle({ eleType: 'div', classes: ['progress'] });
+  $progress.innerHTML = `
+  <div class="progress_count"></div>
+  <progress id="progress-bar" value="" max=""></progress>
+  `;
+
+  return $progress;
+};
+
+export {
+  weatherIconTemp,
+  clockTemp,
+  greetingTemp,
+  greetingResTemp,
+  todoInputTemp,
+  progressTemp,
+};

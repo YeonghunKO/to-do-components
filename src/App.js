@@ -1,6 +1,8 @@
 import Toggle from './components/toggle.js';
 import Clock from './components/clock.js';
 import Greeting from './components/greeting.js';
+import TodoInput from './components/todoInput.js';
+import ProgressBar from './components/progress.js';
 
 export default class App {
   constructor($target) {
@@ -12,6 +14,15 @@ export default class App {
     Toggle();
     Clock($target);
     Greeting($target);
+
+    this.todoInput = TodoInput({
+      $target,
+      onSubmit: value => {
+        console.log(value);
+      },
+    });
+
+    this.progress = new ProgressBar($target);
   }
 
   onDelete = () => {
@@ -26,6 +37,7 @@ export default class App {
 
   setState = nextState => {
     this.state = nextState;
+    this.progress.setState(this.state);
   };
 }
 
