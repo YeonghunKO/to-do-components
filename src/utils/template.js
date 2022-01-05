@@ -28,18 +28,20 @@ const clockTemp = () => {
   $div.innerHTML = `
     <h1 class="clock-container__clock">00:00</h1>
     `;
-  console.log($div);
   return $div;
 };
 
 const greetingTemp = () => {
-  return `
-    <form action="" class="form">
+  const $form = createEle({ eleType: 'form', classes: ['form'] });
+  $form.innerHTML = `
     <input type="text" class="form__input" placeholder="Enter your name" />
-    </form>
-
-    <h4 class="name"></h4>
     `;
+  return $form;
 };
 
-export { weatherIconTemp, clockTemp, greetingTemp };
+const greetingResTemp = () => {
+  const $h4 = createEle({ eleType: 'h4', classes: ['name'] });
+  return $h4;
+};
+
+export { weatherIconTemp, clockTemp, greetingTemp, greetingResTemp };

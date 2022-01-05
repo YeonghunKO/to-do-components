@@ -1,10 +1,12 @@
 import Toggle from './components/toggle.js';
 import Clock from './components/clock.js';
+import Greeting from './components/greeting.js';
 
 export default class App {
   constructor($target) {
     Toggle();
     Clock($target);
+    Greeting($target);
   }
 }
 
