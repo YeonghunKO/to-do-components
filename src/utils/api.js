@@ -11,7 +11,7 @@ export const requestWeather = async (lat, lng) => {
         city: res.name,
         realTemp: res.main.temp,
         feelTemp: res.main.feels_like,
-        weatherIcon: res.weather[0].icon,
+        icon: res.weather[0].icon,
       };
     } else {
       console.log('invalid data');
