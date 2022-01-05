@@ -9,7 +9,6 @@ export default function Clock($target) {
   };
 
   const render = () => {
-    console.log($target);
     $target.appendChild(clockTemp());
   };
 

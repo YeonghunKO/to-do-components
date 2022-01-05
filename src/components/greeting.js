@@ -1,9 +1,17 @@
 import { greetingTemp, greetingResTemp } from '../utils/template.js';
 import { selector } from '../utils/selector.js';
+import { getItem, setItem } from '../utils/storage.js';
 
 export default function Greeting($target) {
   const render = () => {
-    $target.append(greetingTemp(), greetingResTemp());
+    const name = getItem('name');
+    if (name) {
+      $target.appendChild(greetingResTemp());
+      const $h4 = selector('.name');
+      $h4.innerHTML = `${greetWord()} ${name} 님`;
+    } else {
+      $target.append(greetingTemp(), greetingResTemp());
+    }
   };
 
   const greetWord = () => {
@@ -25,7 +33,9 @@ export default function Greeting($target) {
 
   $form.addEventListener('submit', e => {
     e.preventDefault();
-    $h4.innerHTML = `${greetWord()} ${$input.value} 님`;
-    $input.value = '';
+    const name = $input.value;
+    $h4.innerHTML = `${greetWord()} ${name} 님`;
+    $form.classList.add('invisible');
+    setItem('name', name);
   });
 }
