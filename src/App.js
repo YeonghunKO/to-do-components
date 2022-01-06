@@ -3,26 +3,36 @@ import Clock from './components/clock.js';
 import Greeting from './components/greeting.js';
 import TodoInput from './components/todoInput.js';
 import ProgressBar from './components/progress.js';
+import Todo from './components/todo.js';
 
 export default class App {
   constructor($target) {
     this.state = {
       pending: [],
       finished: [],
-      count: 0,
     };
+    // updateState
     Toggle();
     Clock($target);
     Greeting($target);
-
     this.todoInput = TodoInput({
       $target,
       onSubmit: value => {
-        console.log(value);
+        const idObj = idObjCreator(value);
+        this.state.pending.push(idObj);
+        this.setState();
       },
     });
 
     this.progress = new ProgressBar($target);
+    this.todo = new Todo({
+      $target,
+      initialState: this.state,
+      onDelete: this.onDelete,
+      onFinished: this.onFinished,
+      onPending: this.onPending,
+      onEdit: this.onEdit,
+    });
   }
 
   onDelete = () => {
@@ -34,11 +44,22 @@ export default class App {
   onPending = () => {
     console.log('onPending');
   };
-
-  setState = nextState => {
-    this.state = nextState;
-    this.progress.setState(this.state);
+  onEdit = () => {
+    console.log('onEdit');
   };
+
+  setState = (nextState = this.state) => {
+    this.state = nextState;
+    const { pending, finished } = this.state;
+    this.progress.setState({
+      pending: pending.length,
+      finished: finished.length,
+    });
+  };
+}
+
+function idObjCreator(value) {
+  return { id: Date.now() + value, value };
 }
 
 /* 
