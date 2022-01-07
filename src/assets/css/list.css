@@ -27,6 +27,7 @@
   background: rgba(224, 228, 230, 0.6);
   list-style: none;
   padding: 2vmin;
+  min-width: 300px;
 }
 
 .list h3 {

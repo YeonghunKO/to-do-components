@@ -29,9 +29,13 @@ export default function ProgressBar($target) {
 
   this.render = () => {
     const { pending, finished } = this.state;
-    $proCount.innerHTML = calCountMessage(pending, finished);
-    $progressBar.value = finished;
-    $progressBar.max = pending + finished;
+    $proCount.style.opacity = 0;
+    setTimeout(() => {
+      $proCount.innerHTML = calCountMessage(pending, finished);
+      $progressBar.value = finished;
+      $progressBar.max = pending + finished;
+      $proCount.style.opacity = 1;
+    }, 300);
   };
 
   this.render();
