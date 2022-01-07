@@ -13,7 +13,7 @@ export default function Todo({
   $target.appendChild(listContainerTemp());
   const $pendingList = selector('#pending-list');
   const $finishedList = selector('#finished-list');
-  const $listContainer = selector('.list-container');
+  const $listContainer = selector('.list');
 
   this.setState = nextState => {
     this.state = nextState;
@@ -31,14 +31,17 @@ export default function Todo({
   $listContainer.addEventListener('click', e => {
     const { classList } = e.target;
     const li = e.target.closest('li');
-    if (classList.contains('fa-edit')) {
-      onEdit(li.id);
-    } else if (classList.contains('fa-check-square')) {
-      onFinished(li.id);
-    } else if (classList.contains('fas fa-backward')) {
-      onPending(li.id);
-    } else {
-      onDelete(li.id);
+    console.log(classList, li);
+    if (li) {
+      if (classList.contains('fa-edit')) {
+        onEdit(li.id);
+      } else if (classList.contains('fa-check-square')) {
+        onFinished(li.id);
+      } else if (classList.contains('fa-backward')) {
+        onPending(li.id);
+      } else {
+        onDelete(li.id);
+      }
     }
   });
 }

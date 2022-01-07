@@ -37,17 +37,21 @@ export default class App {
 
   onDelete = id => {
     this.deleteTaskFromPending(id);
+    this.deleteTaskFromFinished(id);
     this.setState();
   };
 
   onFinished = id => {
     const deletedTask = this.deleteTaskFromPending(id);
     this.pushTaskToFinished(deletedTask);
-    console.log(this.state);
-    // this.setState();
+    this.setState();
   };
 
-  onPending = id => {};
+  onPending = id => {
+    const deletedTask = this.deleteTaskFromFinished(id);
+    this.pushTaskToPending(deletedTask);
+    this.setState();
+  };
 
   onEdit = id => {};
 
@@ -100,6 +104,17 @@ export default class App {
 function idObjCreator(value) {
   return { id: Date.now() + value, value };
 }
+
+/*
+edit
+  <form action="" class="todo-edit">
+    <input
+      type="text"
+      class="todo-form__input"
+      placeholder="Edit your tasks and Enter"
+    />
+  </form>
+*/
 
 /* 
  

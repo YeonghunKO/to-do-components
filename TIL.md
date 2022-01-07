@@ -8,6 +8,8 @@
 
 2. button의 id를 이용해 dom을 가져오려고 했는데 null이 떴다. 이유는 `id = 'instruction__btn '` 라고 했기 때문. 즉, btn 뒤에 빈칸이 있어서 오류가 난것. 빈칸을 없애주자.
 
+3. 만약에 pending list ul, finisehd list ul에다가 `class='list-container'`를 추가해주고 `list-container`에다가 클릭이벤트를 추가하면 pending list ul에만 추가된다. 따라서 더 상위의 DOM에 다가 클릭 이벤트를 추가해줘야 한다. 그래서 list section 에다가 추가해주니 해결 되었다.
+
 # 할일
 
 1. onSubmit 완성
