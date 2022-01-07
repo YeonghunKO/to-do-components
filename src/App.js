@@ -19,7 +19,7 @@ export default class App {
       $target,
       onSubmit: value => {
         const idObj = idObjCreator(value);
-        this.state.pending.push(idObj);
+        this.pushTaskToPending(idObj);
         this.setState();
       },
     });
@@ -35,27 +35,66 @@ export default class App {
     });
   }
 
-  onDelete = () => {
-    console.log('delete');
+  onDelete = id => {
+    this.deleteTaskFromPending(id);
+    this.setState();
   };
-  onFinished = () => {
-    console.log('onFinished');
+
+  onFinished = id => {
+    const deletedTask = this.deleteTaskFromPending(id);
+    this.pushTaskToFinished(deletedTask);
+    console.log(this.state);
+    // this.setState();
   };
-  onPending = () => {
-    console.log('onPending');
-  };
-  onEdit = () => {
-    console.log('onEdit');
-  };
+
+  onPending = id => {};
+
+  onEdit = id => {};
 
   setState = (nextState = this.state) => {
     this.state = nextState;
     const { pending, finished } = this.state;
+    // console.log(pending, finished);
     this.progress.setState({
       pending: pending.length,
       finished: finished.length,
     });
+    this.todo.setState({ pending, finished });
   };
+
+  deleteTaskFromPending = id => {
+    let idTask;
+    this.state.pending = this.state.pending.filter(task => {
+      if (task.id !== id) {
+        return true;
+      } else {
+        idTask = task;
+      }
+    });
+    return idTask;
+  };
+
+  deleteTaskFromFinished = id => {
+    let idTask;
+    this.state.finished = this.state.finished.filter(task => {
+      if (task.id !== id) {
+        return true;
+      } else {
+        idTask = task;
+      }
+    });
+    return idTask;
+  };
+
+  pushTaskToPending = obj => {
+    this.state.pending.push(obj);
+  };
+
+  pushTaskToFinished = obj => {
+    this.state.finished.push(obj);
+  };
+
+  saveState = () => {};
 }
 
 function idObjCreator(value) {

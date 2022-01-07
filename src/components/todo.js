@@ -1,9 +1,5 @@
 import { selector } from '../utils/selector.js';
-import {
-  listContainerTemp,
-  pendingListTemp,
-  finishedListTemp,
-} from '../utils/template.js';
+import { listContainerTemp, listTemp } from '../utils/template.js';
 
 export default function Todo({
   $target,
@@ -17,7 +13,7 @@ export default function Todo({
   $target.appendChild(listContainerTemp());
   const $pendingList = selector('#pending-list');
   const $finishedList = selector('#finished-list');
-  const $buttons = selector('.buttons');
+  const $listContainer = selector('.list-container');
 
   this.setState = nextState => {
     this.state = nextState;
@@ -26,16 +22,23 @@ export default function Todo({
 
   this.render = () => {
     const { pending, finished } = this.state;
-    const pendingListTemps = pendingListTemp(pending);
-    const finishedListTemps = finishedListTemp(finished);
+    const pendingListTemps = listTemp(pending, 'pending');
+    const finishedListTemps = listTemp(finished, 'finished');
     $pendingList.innerHTML = pendingListTemps;
     $finishedList.innerHTML = finishedListTemps;
   };
 
-  if ($buttons) {
-    $buttons.addEventListener('click', e => {
-      const { classsName } = e.$target;
-      console.log(className);
-    });
-  }
+  $listContainer.addEventListener('click', e => {
+    const { classList } = e.target;
+    const li = e.target.closest('li');
+    if (classList.contains('fa-edit')) {
+      onEdit(li.id);
+    } else if (classList.contains('fa-check-square')) {
+      onFinished(li.id);
+    } else if (classList.contains('fas fa-backward')) {
+      onPending(li.id);
+    } else {
+      onDelete(li.id);
+    }
+  });
 }

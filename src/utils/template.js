@@ -73,14 +73,14 @@ const listContainerTemp = () => {
   $container.innerHTML = `
   <div>
   <h3>PENDING</h3>
-    <ul id="pending-list">
+    <ul id="pending-list" class='list-container'>
     
     </ul>
   </div>
 
   <div>
   <h3>FINISHED</h3>
-    <ul id="finished-list">
+    <ul id="finished-list" class='list-container'>
     
     </ul>
   </div>
@@ -88,38 +88,22 @@ const listContainerTemp = () => {
   return $container;
 };
 
-const pendingListTemp = pendingList => {
-  return pendingList
+const listTemp = (lists, type) => {
+  return lists
     .map(list => {
       return `
     <li id="${list.id}">
     <span>${list.value}</span>
     <div class="buttons">
       <i class="far fa-edit"></i>
-      <i class="far fa-check-square"></i>
+      <i class="${
+        type === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
+      }"></i>
       <i class="far fa-trash-alt"></i>
     </div>
   </li>
   
   `;
-    })
-    .join('');
-};
-
-const finishedListTemp = finishedList => {
-  return finishedList
-    .map(list => {
-      return `
-  <li id="${list.id}">
-  <span>${list.value}</span>
-  <div class="buttons">
-    <i class="far fa-edit"></i>
-    <i class="far fa-check-square"></i>
-    <i class="far fa-trash-alt"></i>
-  </div>
-</li>
-
-`;
     })
     .join('');
 };
@@ -132,6 +116,5 @@ export {
   todoInputTemp,
   progressTemp,
   listContainerTemp,
-  pendingListTemp,
-  finishedListTemp,
+  listTemp,
 };
