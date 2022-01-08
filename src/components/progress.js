@@ -7,6 +7,9 @@ export default function ProgressBar($target) {
   const $progressBar = selector('#progress-bar');
 
   const calCountMessage = (pending, finished) => {
+    if (pending > 15) {
+      alert('고마해라 마이 묵읏다 아이가');
+    }
     if (pending || finished) {
       if (pending === 0) {
         return '모든 할 일을 끝냈습니다! 자신에게 보상을 주십시오✨';

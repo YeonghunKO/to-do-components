@@ -45,7 +45,7 @@ export default function Todo({
 
         $li.innerHTML = editTemp();
         const $editInput = selector('.todo-edit__input');
-
+        $editInput.focus();
         $editInput.addEventListener('keyup', e => {
           const listType = $li.parentElement.id;
           const { key } = e;
@@ -53,7 +53,10 @@ export default function Todo({
           if (key === 'Enter') {
             const { id } = $li;
             const { value } = $editInput;
-
+            if (!value.length) {
+              alert('한 글자 이상 입력하기!');
+              return;
+            }
             $li.innerHTML = listRestoreTemp(value, listType);
             onEdit(id, value, listType);
           } else if (key === 'Escape') {
