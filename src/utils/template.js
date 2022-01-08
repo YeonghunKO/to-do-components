@@ -93,7 +93,13 @@ const listTemp = (lists, type) => {
     .map(list => {
       return `
     <li id="${list.id}">
-    <span>${list.value}</span>
+    <div>
+      <span class='${
+        type === 'pending' ? 'pending-span' : 'finished-span'
+      }'></span>
+      <span>${list.value}</span>
+    </div>
+   
     <div class="buttons">
       <i class="far fa-edit"></i>
       <i class="${
@@ -108,6 +114,35 @@ const listTemp = (lists, type) => {
     .join('');
 };
 
+const editTemp = () => {
+  return `
+  <input
+    type="text"
+    class="todo-edit__input"
+    placeholder="Edit your tasks and press Enter"
+  />
+  `;
+};
+
+const listRestoreTemp = (value, listType) => {
+  return `
+  <div>
+    <span class='${
+      listType === 'pending-list' ? 'pending-span' : 'finished-span'
+    }'></span>
+    <span>${value}</span>
+  </div>
+   
+  <div class="buttons">
+    <i class="far fa-edit"></i>
+    <i class="${
+      listType === 'pending-list' ? 'far fa-check-square' : 'fas fa-backward'
+    }"></i>
+    <i class="far fa-trash-alt"></i>
+  </div>
+  `;
+};
+
 export {
   weatherIconTemp,
   clockTemp,
@@ -117,4 +152,6 @@ export {
   progressTemp,
   listContainerTemp,
   listTemp,
+  editTemp,
+  listRestoreTemp,
 };

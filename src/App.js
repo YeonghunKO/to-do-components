@@ -53,7 +53,21 @@ export default class App {
     this.setState();
   };
 
-  onEdit = id => {};
+  onEdit = (id, newValue, listType) => {
+    if (listType === 'pending-list') {
+      this.state.pending.forEach(task => {
+        if (task.id === id) {
+          task.value = newValue;
+        }
+      });
+    } else {
+      this.state.finished.forEach(task => {
+        if (task.id === id) {
+          task.value = newValue;
+        }
+      });
+    }
+  };
 
   setState = (nextState = this.state) => {
     this.state = nextState;
@@ -110,8 +124,8 @@ edit
   <form action="" class="todo-edit">
     <input
       type="text"
-      class="todo-form__input"
-      placeholder="Edit your tasks and Enter"
+      class="todo-edit__input"
+      placeholder="Edit your tasks and press Enter"
     />
   </form>
 */
@@ -137,7 +151,8 @@ edit
       <h3>PENDING</h3>
       <ul id="pending-list">
         <li id="1640929192624" class="ui-sortable-handle">
-          <span>list 구현</span>
+        <span class="pending-span"></span>  
+        <span>list 구현</span>
           <div class="buttons">
             <i class="far fa-edit"></i>
             <i class="far fa-check-square"></i>
@@ -151,7 +166,8 @@ edit
       <h3>FINISHED</h3>
       <ul id="finished-list">
         <li id="1640929192624" class="ui-sortable-handle">
-          <span>weather 구현</span>
+        <span class="finished-span"></span>  
+        <span>weather 구현</span>
           <div class="buttons">
             <i class="far fa-edit"></i>
             <i class="fas fa-backward"></i>

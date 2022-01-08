@@ -12,7 +12,10 @@ export default function TodoInput({ $target, onSubmit }) {
 
   $todoForm.addEventListener('submit', e => {
     e.preventDefault();
-    onSubmit($todoInput.value);
-    $todoInput.value = '';
+    const value = $todoInput.value.trim('');
+    if (value.length) {
+      onSubmit($todoInput.value);
+      $todoInput.value = '';
+    }
   });
 }

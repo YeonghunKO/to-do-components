@@ -1,5 +1,10 @@
 import { selector } from '../utils/selector.js';
-import { listContainerTemp, listTemp } from '../utils/template.js';
+import {
+  listContainerTemp,
+  listTemp,
+  editTemp,
+  listRestoreTemp,
+} from '../utils/template.js';
 
 export default function Todo({
   $target,
@@ -30,17 +35,37 @@ export default function Todo({
 
   $listContainer.addEventListener('click', e => {
     const { classList } = e.target;
-    const li = e.target.closest('li');
-    console.log(classList, li);
-    if (li) {
+    const $li = e.target.closest('li');
+
+    if ($li) {
       if (classList.contains('fa-edit')) {
-        onEdit(li.id);
+        const originalLiVal = $li.querySelector(
+          'span:nth-of-type(2)'
+        ).innerText;
+
+        $li.innerHTML = editTemp();
+        const $editInput = selector('.todo-edit__input');
+
+        $editInput.addEventListener('keyup', e => {
+          const listType = $li.parentElement.id;
+          const { key } = e;
+
+          if (key === 'Enter') {
+            const { id } = $li;
+            const { value } = $editInput;
+
+            $li.innerHTML = listRestoreTemp(value, listType);
+            onEdit(id, value, listType);
+          } else if (key === 'Escape') {
+            $li.innerHTML = listRestoreTemp(originalLiVal, listType);
+          }
+        });
       } else if (classList.contains('fa-check-square')) {
-        onFinished(li.id);
+        onFinished($li.id);
       } else if (classList.contains('fa-backward')) {
-        onPending(li.id);
-      } else {
-        onDelete(li.id);
+        onPending($li.id);
+      } else if (classList.contains('fa-trash-alt')) {
+        onDelete($li.id);
       }
     }
   });

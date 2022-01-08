@@ -12,10 +12,9 @@
 
 # 할일
 
-1. onSubmit 완성
+1. onSubmit 완성 ---- done.
 2. onDelete,onFinished,onPending,onEdit 구현
-3. 2번 할때마다 storage 저장 or 삭제
-4. 그리고 state업데이트 하기(list,progress에 넘겨주게)
-5. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
-6. 드래그 기능 구현
-7. beforeloaded 이벤트를 통해 변경사항 최종 저장
+3. 그리고 state업데이트 하기(list,progress에 넘겨주게)
+4. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
+5. 드래그 기능 구현
+6. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장
