@@ -30,6 +30,38 @@
   list-style: none;
   padding: 2vmin;
   min-width: 300px;
+  overflow-y: scroll;
+  height: 260px;
+}
+
+.list ul::-webkit-scrollbar-thumb {
+  background-color: #eaeaea 
+
+  border-radius: 10px;
+}
+
+.list ul {
+  /* scrollbar-color:  */
+  scrollbar-width: thin;
+}
+.list ul::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+}
+.list ul::-webkit-scrollbar-corner {
+  background: rgba(172, 172, 172, 0.6);
+}
+.list ul::-webkit-scrollbar-thumb {
+  background: rgba(172, 172, 172, 0.6);
+  border: 1px solid #d4d4d4;
+}
+.list ul::-webkit-scrollbar-thumb:hover {
+  background: #848484;
+}
+.list ul::-webkit-scrollbar-track {
+  border: 1px solid #d4d4d4;
+  background-color: #d4d4d4;
 }
 
 .list h3 {
