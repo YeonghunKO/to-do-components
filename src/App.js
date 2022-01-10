@@ -4,6 +4,7 @@ import Greeting from './components/greeting.js';
 import TodoInput from './components/todoInput.js';
 import ProgressBar from './components/progress.js';
 import Todo from './components/todo.js';
+import { isValidate } from './utils/validate.js';
 
 export default class App {
   constructor($target) {
@@ -15,6 +16,7 @@ export default class App {
     Toggle();
     Clock($target);
     Greeting($target);
+
     this.todoInput = TodoInput({
       $target,
       onSubmit: value => {
@@ -25,6 +27,7 @@ export default class App {
     });
 
     this.progress = new ProgressBar($target);
+
     this.todo = new Todo({
       $target,
       initialState: this.state,
@@ -70,14 +73,16 @@ export default class App {
   };
 
   setState = (nextState = this.state) => {
-    this.state = nextState;
-    const { pending, finished } = this.state;
-    // console.log(pending, finished);
-    this.progress.setState({
-      pending: pending.length,
-      finished: finished.length,
-    });
-    this.todo.setState({ pending, finished });
+    if (isValidate(nextState)) {
+      this.state = nextState;
+      const { pending, finished } = this.state;
+      // console.log(pending, finished);
+      this.progress.setState({
+        pending: pending.length,
+        finished: finished.length,
+      });
+      this.todo.setState({ pending, finished });
+    }
   };
 
   deleteTaskFromPending = id => {

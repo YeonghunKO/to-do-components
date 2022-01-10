@@ -15,8 +15,8 @@
 1. onSubmit 완성 ---- done.
 2. onDelete,onFinished,onPending,onEdit 구현 --- done
 3. 그리고 state업데이트 하기(list,progress에 넘겨주게) --- done
-4. scrollbar
-5. state 검증
+4. scrollbar --- done
+5. state 검증 --- movieSeat Validate.js 를 참고하기! --- done
 6. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
 7. 드래그 기능 구현
 8. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장

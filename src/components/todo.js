@@ -46,6 +46,7 @@ export default function Todo({
         $li.innerHTML = editTemp();
         const $editInput = selector('.todo-edit__input');
         $editInput.focus();
+        $editInput.value = originalLiVal;
         $editInput.addEventListener('keyup', e => {
           const listType = $li.parentElement.id;
           const { key } = e;
