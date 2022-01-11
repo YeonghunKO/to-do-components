@@ -10,6 +10,8 @@
 
 3. 만약에 pending list ul, finisehd list ul에다가 `class='list-container'`를 추가해주고 `list-container`에다가 클릭이벤트를 추가하면 pending list ul에만 추가된다. 따라서 더 상위의 DOM에 다가 클릭 이벤트를 추가해줘야 한다. 그래서 list section 에다가 추가해주니 해결 되었다.
 
+4. drag and drop 아티클 하나 쓰기.(어떤 태그가 start이고 enter인지 그런거 중심으로 설명)
+
 # 할일
 
 1. onSubmit 완성 ---- done.
@@ -17,6 +19,13 @@
 3. 그리고 state업데이트 하기(list,progress에 넘겨주게) --- done
 4. scrollbar --- done
 5. state 검증 --- movieSeat Validate.js 를 참고하기! --- done
-6. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
+6. list hover할때 after 가상 선택자로 'drag me' 구현해보기(drag me는 중간에 위치하는게 좋을듯)
 7. 드래그 기능 구현
-8. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장
+   - 로토의 todo-drag and drop에 단서가 있을지도
+   - setData/getData로 li.id,innerHTML 객체로 넘겨줘서 받아오고, dragend할때 교체함.
+   - 출처: https://webdevtrick.com/html-drag-and-drop-list/#comment-39886
+   - submit, onFinished, onPending 일때만 드래그드랍 이벤트가 등록되어야 함.
+8. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
+9. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장
+10. pending , finished 둘다 동시에 랜더링 하지말고 선택적으로 랜더링 하도록 리팩토링 하기
+    - setState에 두번째 인자로 renderType을 넘겨주고(부모의 클래스에 따라서) todo.render에서 선택적으로 랜더하는 거다.

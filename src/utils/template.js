@@ -92,24 +92,23 @@ const listTemp = (lists, type) => {
   return lists
     .map(list => {
       return `
-    <li id="${list.id}">
-    <div>
-      <span class='${
-        type === 'pending' ? 'pending-span' : 'finished-span'
-      }'></span>
-      <span>${list.value}</span>
-    </div>
-   
-    <div class="buttons">
-      <i class="far fa-edit"></i>
-      <i class="${
-        type === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
-      }"></i>
-      <i class="far fa-trash-alt"></i>
-    </div>
-  </li>
-  
-  `;
+      <li id="${list.id}" draggable='true'>
+      <div>
+        <span class='${
+          type === 'pending' ? 'pending-span' : 'finished-span'
+        }'></span>
+        <span>${list.value}</span>
+      </div>
+    
+      <div class="buttons">
+        <i class="far fa-edit"></i>
+        <i class="${
+          type === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
+        }"></i>
+        <i class="far fa-trash-alt"></i>
+      </div>
+    </li>
+      `;
     })
     .join('');
 };

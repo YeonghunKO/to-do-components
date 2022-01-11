@@ -15,6 +15,8 @@ export default function Todo({
   onEdit,
 }) {
   this.state = initialState;
+  this.initAddDragDropEvent = false;
+
   $target.appendChild(listContainerTemp());
   const $pendingList = selector('#pending-list');
   const $finishedList = selector('#finished-list');
@@ -31,7 +33,16 @@ export default function Todo({
     const finishedListTemps = listTemp(finished, 'finished');
     $pendingList.innerHTML = pendingListTemps;
     $finishedList.innerHTML = finishedListTemps;
+    if (!this.initAddDragDropEvent) {
+      // const $listSection = selector('.list')
+      // const $lists = $listSection.querySelectorAll('li')
+      // $lists.forEach(list=>{
+      //   addEventDragAndDrop(list)
+      // })
+    }
   };
+
+  this.addEventDragAndDrop = () => {};
 
   $listContainer.addEventListener('click', e => {
     const { classList } = e.target;
@@ -74,3 +85,15 @@ export default function Todo({
     }
   });
 }
+
+function dragStart() {}
+
+function dragEnter() {}
+
+function dragOver() {}
+
+function dragLeave() {}
+
+function dragDrop() {}
+
+function dragEnd() {}
