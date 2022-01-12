@@ -88,14 +88,14 @@ const listContainerTemp = () => {
   return $container;
 };
 
-const listTemp = (lists, type) => {
+const listTempArray = (lists, taskType) => {
   return lists
     .map(list => {
       return `
       <li id="${list.id}" draggable='true'>
       <div>
         <span class='${
-          type === 'pending' ? 'pending-span' : 'finished-span'
+          taskType === 'pending' ? 'pending-span' : 'finished-span'
         }'></span>
         <span>${list.value}</span>
       </div>
@@ -103,7 +103,7 @@ const listTemp = (lists, type) => {
       <div class="buttons">
         <i class="far fa-edit"></i>
         <i class="${
-          type === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
+          taskType === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
         }"></i>
         <i class="far fa-trash-alt"></i>
       </div>
@@ -111,6 +111,28 @@ const listTemp = (lists, type) => {
       `;
     })
     .join('');
+};
+
+const singleListNode = (listObj, taskType) => {
+  const { id, value } = listObj;
+  const $li = createEle({ eleType: 'li', id });
+  $li.innerHTML = `
+  <div>
+    <span class='${
+      taskType === 'pending' ? 'pending-span' : 'finished-span'
+    }'></span>
+    <span>${value}</span>
+  </div>
+
+  <div class="buttons">
+    <i class="far fa-edit"></i>
+    <i class="${
+      taskType === 'pending' ? 'far fa-check-square' : 'fas fa-backward'
+    }"></i>
+    <i class="far fa-trash-alt"></i>
+  </div>
+    `;
+  return $li;
 };
 
 const editTemp = () => {
@@ -150,7 +172,8 @@ export {
   todoInputTemp,
   progressTemp,
   listContainerTemp,
-  listTemp,
+  listTempArray,
+  singleListNode,
   editTemp,
   listRestoreTemp,
 };

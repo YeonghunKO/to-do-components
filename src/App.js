@@ -22,7 +22,7 @@ export default class App {
       onSubmit: value => {
         const idObj = idObjCreator(value);
         this.pushTaskToPending(idObj);
-        this.setState();
+        this.setState({ renderType: 'submit' });
       },
     });
 
@@ -38,22 +38,25 @@ export default class App {
     });
   }
 
-  onDelete = id => {
-    this.deleteTaskFromPending(id);
-    this.deleteTaskFromFinished(id);
-    this.setState();
+  onDelete = ($li, parentId) => {
+    if (parentId === 'pending-list') {
+      this.deleteTaskFromPending($li.id);
+    } else {
+      this.deleteTaskFromFinished($li.id);
+    }
+    this.setState({ renderType: 'delete', $li, parentId });
   };
 
-  onFinished = id => {
-    const deletedTask = this.deleteTaskFromPending(id);
+  onFinished = $li => {
+    const deletedTask = this.deleteTaskFromPending($li.id);
     this.pushTaskToFinished(deletedTask);
-    this.setState();
+    this.setState({ renderType: 'onFinished', $li });
   };
 
-  onPending = id => {
-    const deletedTask = this.deleteTaskFromFinished(id);
+  onPending = $li => {
+    const deletedTask = this.deleteTaskFromFinished($li.id);
     this.pushTaskToPending(deletedTask);
-    this.setState();
+    this.setState({ renderType: 'onPending', $li });
   };
 
   onEdit = (id, newValue, listType) => {
@@ -72,7 +75,7 @@ export default class App {
     }
   };
 
-  setState = (nextState = this.state) => {
+  setState = ({ renderType, $li, parentId }, nextState = this.state) => {
     if (isValidate(nextState)) {
       this.state = nextState;
       const { pending, finished } = this.state;
@@ -81,7 +84,14 @@ export default class App {
         pending: pending.length,
         finished: finished.length,
       });
-      this.todo.setState({ pending, finished });
+      switch (renderType) {
+        case 'submit':
+          this.todo.setState({ pending, finished }, renderType);
+          break;
+        default:
+          this.todo.setState({ pending, finished }, renderType, $li, parentId);
+          break;
+      }
     }
   };
 

@@ -1,5 +1,7 @@
 import { selector } from '../utils/selector.js';
 import { todoInputTemp } from '../utils/template.js';
+import { addEventDragAndDrop } from '../utils/addDragAndDrop.js';
+
 export default function TodoInput({ $target, onSubmit }) {
   const render = () => {
     $target.appendChild(todoInputTemp());

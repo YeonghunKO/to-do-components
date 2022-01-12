@@ -1,10 +1,13 @@
 import { selector } from '../utils/selector.js';
 import {
   listContainerTemp,
-  listTemp,
+  listTempArray,
+  singleListNode,
   editTemp,
   listRestoreTemp,
 } from '../utils/template.js';
+
+import { addEventDragAndDrop } from '../utils/addDragAndDrop.js';
 
 export default function Todo({
   $target,
@@ -22,33 +25,53 @@ export default function Todo({
   const $finishedList = selector('#finished-list');
   const $listContainer = selector('.list');
 
-  this.setState = nextState => {
+  this.setState = (nextState, renderType, $li, parentId) => {
     this.state = nextState;
-    this.render();
+    this.render(renderType, $li, parentId);
   };
 
-  this.render = () => {
+  this.render = (renderType, $li, parentId) => {
     const { pending, finished } = this.state;
-    const pendingListTemps = listTemp(pending, 'pending');
-    const finishedListTemps = listTemp(finished, 'finished');
-    $pendingList.innerHTML = pendingListTemps;
-    $finishedList.innerHTML = finishedListTemps;
-    if (!this.initAddDragDropEvent) {
-      // const $listSection = selector('.list')
-      // const $lists = $listSection.querySelectorAll('li')
-      // $lists.forEach(list=>{
-      //   addEventDragAndDrop(list)
-      // })
+    if (renderType === 'submit') {
+      const lastPendingTaskObj = pending[pending.length - 1];
+      const $lastPendingLi = singleListNode(lastPendingTaskObj, 'pending');
+      $pendingList.appendChild($lastPendingLi);
+    } else if (renderType === 'onPending') {
+      $finishedList.removeChild($li);
+      const value = $li.querySelector('span:nth-of-type(2)').innerText;
+      const $pendingLi = singleListNode({ id: $li.id, value }, 'pending');
+      $pendingList.appendChild($pendingLi);
+    } else if (renderType === 'onFinished') {
+      $pendingList.removeChild($li);
+      const value = $li.querySelector('span:nth-of-type(2)').innerText;
+      const $finishedLi = singleListNode({ id: $li.id, value }, 'finished');
+      $finishedList.appendChild($finishedLi);
+    } else if (renderType === 'delete') {
+      if (parentId === 'pending-list') {
+        $pendingList.removeChild($li);
+      } else {
+        $finishedList.removeChild($li);
+      }
+      // 결국 또다시 부모 태그를 알아낼 수 있는 어떤것을 또 pass해야하나??
     }
+    // const pendingListTemps = listTempArray(pending, 'pending');
+    // const finishedListTemps = listTempArray(finished, 'finished');
+    // $pendingList.innerHTML = pendingListTemps;
+    // $finishedList.innerHTML = finishedListTemps;
+    // if (!this.initAddDragDropEvent) {
+    //   const $listSection = selector('.list');
+    //   const $lists = $listSection.querySelectorAll('li');
+    //   $lists.forEach(list => {
+    //     addEventDragAndDrop(list);
+    //   });
+    // }
   };
-
-  this.addEventDragAndDrop = () => {};
 
   $listContainer.addEventListener('click', e => {
     const { classList } = e.target;
     const $li = e.target.closest('li');
-
     if ($li) {
+      const $parent = $li.parentElement;
       if (classList.contains('fa-edit')) {
         const originalLiVal = $li.querySelector(
           'span:nth-of-type(2)'
@@ -76,24 +99,12 @@ export default function Todo({
           }
         });
       } else if (classList.contains('fa-check-square')) {
-        onFinished($li.id);
+        onFinished($li);
       } else if (classList.contains('fa-backward')) {
-        onPending($li.id);
+        onPending($li);
       } else if (classList.contains('fa-trash-alt')) {
-        onDelete($li.id);
+        onDelete($li, $parent.id);
       }
     }
   });
 }
-
-function dragStart() {}
-
-function dragEnter() {}
-
-function dragOver() {}
-
-function dragLeave() {}
-
-function dragDrop() {}
-
-function dragEnd() {}
