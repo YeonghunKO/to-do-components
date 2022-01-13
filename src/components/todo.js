@@ -18,7 +18,6 @@ export default function Todo({
   onEdit,
 }) {
   this.state = initialState;
-  this.initAddDragDropEvent = false;
 
   $target.appendChild(listContainerTemp());
   const $pendingList = selector('#pending-list');
@@ -55,14 +54,16 @@ export default function Todo({
       } else {
         $finishedList.removeChild($li);
       }
+    } else if (renderType === 'init') {
+      $pendingList.innerHTML = listTempArray(pending, 'pending');
+      $finishedList.innerHTML = listTempArray(finished, 'finished');
+
+      const $listSection = selector('.list');
+      const $lists = $listSection.querySelectorAll('li');
+      $lists.forEach(list => {
+        addEventDragAndDrop(list);
+      });
     }
-    // if (!this.initAddDragDropEvent) {
-    //   const $listSection = selector('.list');
-    //   const $lists = $listSection.querySelectorAll('li');
-    //   $lists.forEach(list => {
-    //     addEventDragAndDrop(list);
-    //   });
-    // }
   };
 
   $listContainer.addEventListener('click', e => {
