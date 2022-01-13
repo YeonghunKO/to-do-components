@@ -116,6 +116,7 @@ const listTempArray = (lists, taskType) => {
 const singleListNode = (listObj, taskType) => {
   const { id, value } = listObj;
   const $li = createEle({ eleType: 'li', id });
+  $li.setAttribute('draggable', true);
   $li.innerHTML = `
   <div>
     <span class='${
