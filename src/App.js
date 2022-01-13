@@ -7,13 +7,14 @@ import Todo from './components/todo.js';
 
 import { isValidate } from './utils/validate.js';
 
+import { Hash } from './utils/hash.js';
+
 export default class App {
   constructor($target) {
     this.state = {
       pending: [],
       finished: [],
     };
-    // updateState
     Toggle();
     Clock($target);
     Greeting($target);
@@ -23,6 +24,7 @@ export default class App {
       onSubmit: value => {
         const idObj = idObjCreator(value);
         this.pushTaskToPending(idObj);
+        // console.log(idObj);
         this.setState({ renderType: 'submit' });
       },
     });
@@ -69,6 +71,7 @@ export default class App {
       });
     } else {
       this.state.finished.forEach(task => {
+        console.log(task, id);
         if (task.id === id) {
           task.value = newValue;
         }
@@ -80,7 +83,6 @@ export default class App {
     if (isValidate(nextState)) {
       this.state = nextState;
       const { pending, finished } = this.state;
-      // console.log(pending, finished);
       this.progress.setState({
         pending: pending.length,
         finished: finished.length,
@@ -132,66 +134,5 @@ export default class App {
 }
 
 function idObjCreator(value) {
-  return { id: Date.now() + value, value };
+  return { id: Hash.createHash(Hash.getSalt()), value };
 }
-
-/*
-edit
-  <form action="" class="todo-edit">
-    <input
-      type="text"
-      class="todo-edit__input"
-      placeholder="Edit your tasks and press Enter"
-    />
-  </form>
-*/
-
-/* 
- 
-  <form action="" class="todo-form">
-    <input
-      type="text"
-      class="todo-form__input"
-      placeholder="Enter your tasks"
-    />
-  </form>
-
-  <div class="progress">
-    <div class="progress_count">2</div>
-    <progress id="progress-bar" value="2" max="10"></progress>
-  </div>
-
-  <section class="list">
-
-    <div>
-      <h3>PENDING</h3>
-      <ul id="pending-list">
-        <li id="1640929192624" class="ui-sortable-handle">
-        <span class="pending-span"></span>  
-        <span>list 구현</span>
-          <div class="buttons">
-            <i class="far fa-edit"></i>
-            <i class="far fa-check-square"></i>
-            <i class="far fa-trash-alt"></i>
-          </div>
-        </li>
-      </ul>
-    </div>
-    
-    <div>
-      <h3>FINISHED</h3>
-      <ul id="finished-list">
-        <li id="1640929192624" class="ui-sortable-handle">
-        <span class="finished-span"></span>  
-        <span>weather 구현</span>
-          <div class="buttons">
-            <i class="far fa-edit"></i>
-            <i class="fas fa-backward"></i>
-            <i class="far fa-trash-alt"></i>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-  </section>
-*/
