@@ -35,16 +35,19 @@ export default function Todo({
     if (renderType === 'submit') {
       const lastPendingTaskObj = pending[pending.length - 1];
       const $lastPendingLi = singleListNode(lastPendingTaskObj, 'pending');
+      addEventDragAndDrop($lastPendingLi);
       $pendingList.appendChild($lastPendingLi);
     } else if (renderType === 'onPending') {
       $finishedList.removeChild($li);
       const value = $li.querySelector('span:nth-of-type(2)').innerText;
       const $pendingLi = singleListNode({ id: $li.id, value }, 'pending');
+      addEventDragAndDrop($pendingLi);
       $pendingList.appendChild($pendingLi);
     } else if (renderType === 'onFinished') {
       $pendingList.removeChild($li);
       const value = $li.querySelector('span:nth-of-type(2)').innerText;
       const $finishedLi = singleListNode({ id: $li.id, value }, 'finished');
+      addEventDragAndDrop($finishedLi);
       $finishedList.appendChild($finishedLi);
     } else if (renderType === 'delete') {
       if (parentId === 'pending-list') {
@@ -52,12 +55,7 @@ export default function Todo({
       } else {
         $finishedList.removeChild($li);
       }
-      // 결국 또다시 부모 태그를 알아낼 수 있는 어떤것을 또 pass해야하나??
     }
-    // const pendingListTemps = listTempArray(pending, 'pending');
-    // const finishedListTemps = listTempArray(finished, 'finished');
-    // $pendingList.innerHTML = pendingListTemps;
-    // $finishedList.innerHTML = finishedListTemps;
     // if (!this.initAddDragDropEvent) {
     //   const $listSection = selector('.list');
     //   const $lists = $listSection.querySelectorAll('li');

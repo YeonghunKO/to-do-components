@@ -36,4 +36,4 @@
 8. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
 9. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장
 10. pending , finished 둘다 동시에 랜더링 하지말고 선택적으로 랜더링 하도록 리팩토링 하기
-    - setState에 두번째 인자로 renderType을 넘겨주고(부모의 클래스에 따라서) todo.render에서 선택적으로 랜더하는 거다.
+    - setState에 두번째 인자로 renderType을 넘겨주고(부모의 클래스에 따라서) todo.render에서 선택적으로 랜더하는 거다. --- done

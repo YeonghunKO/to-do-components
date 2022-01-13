@@ -22,7 +22,7 @@
   height: 22px;
   font-size: 10px;
   position: absolute;
-  cursor: pointer;
+  /* cursor: move; */
   transition: all 200ms;
   transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.5);
   transform: translateX(120%);

@@ -4,6 +4,7 @@ import Greeting from './components/greeting.js';
 import TodoInput from './components/todoInput.js';
 import ProgressBar from './components/progress.js';
 import Todo from './components/todo.js';
+
 import { isValidate } from './utils/validate.js';
 
 export default class App {
