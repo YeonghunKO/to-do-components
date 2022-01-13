@@ -21,8 +21,8 @@
 3. 그리고 state업데이트 하기(list,progress에 넘겨주게) --- done
 4. scrollbar --- done
 5. state 검증 --- movieSeat Validate.js 를 참고하기! --- done
-6. list hover할때 after 가상 선택자로 'drag me' 구현해보기(drag me는 중간에 위치하는게 좋을듯)
-7. 드래그 기능 구현
+6. list hover할때 after 가상 선택자로 'drag me' 구현해보기(drag me는 중간에 위치하는게 좋을듯) --- done
+7. 드래그 기능 구현 --- done
 
    - 로토의 todo-drag and drop에 단서가 있을지도
    - setData/getData로 li.id,innerHTML 객체로 넘겨줘서 받아오고, dragend할때 교체함.
@@ -33,7 +33,14 @@
 
    -- 왜냐면 삭제를 하면 id가 pending에서 없어짐. 근데 finished,pending을 누르면 없어진 id를 찾으려고 할것이다. 그래서 undefined가 리턴이 되어 push되고 그럼 undefined에서 id,value를 찾으려고 할 것이기 때문에 오류가 나는 것이다.
 
-8. 시작할때 LS에서 데이터 가져와서 state업데이트 하기.
-9. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장
+8. 시작할때 LS에서 데이터 가져와서 state업데이트 하기. --- done
+9. beforeloaded 이벤트를 통해 변경사항 localStorage에 최종 저장 --- done
 10. pending , finished 둘다 동시에 랜더링 하지말고 선택적으로 랜더링 하도록 리팩토링 하기
+
     - setState에 두번째 인자로 renderType을 넘겨주고(부모의 클래스에 따라서) todo.render에서 선택적으로 랜더하는 거다. --- done
+
+11. commit 할 때 bug까지 명시해주기!
+
+    - list만 가져올려면 children메소드를 써야하고 spread syntax로 array화 해줌
+
+12. this.state가 많이 쓰이지 않는데 과연 필요 할까??
