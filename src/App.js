@@ -8,14 +8,9 @@ import Todo from './components/todo.js';
 import { isValidate } from './utils/validate.js';
 
 import { Hash } from './utils/hash.js';
-import { getItem, setItem } from './utils/storage.js';
-import { selector } from './utils/selector.js';
 
 export default class App {
   constructor($target) {
-    this.PENDING_LIST_KEYWORD = 'pending-list';
-    this.FINISHED_LIST_KEYWORD = 'finished-list';
-
     this.state = {
       pending: [],
       finished: [],
@@ -27,7 +22,7 @@ export default class App {
     this.todoInput = TodoInput({
       $target,
       onSubmit: value => {
-        const idObj = listObjCreator(value);
+        const idObj = idObjCreator(value);
         this.pushTaskToPending(idObj);
         // console.log(idObj);
         this.setState({ renderType: 'submit' });
@@ -44,10 +39,6 @@ export default class App {
       onPending: this.onPending,
       onEdit: this.onEdit,
     });
-
-    this.populateList();
-
-    window.addEventListener('beforeunload', this.saveState);
   }
 
   onDelete = ($li, parentId) => {
@@ -139,41 +130,9 @@ export default class App {
     this.state.finished.push(obj);
   };
 
-  populateList = () => {
-    const pendingList = getItem(this.PENDING_LIST_KEYWORD, []);
-    const finisehdList = getItem(this.FINISHED_LIST_KEYWORD, []);
-    this.setState(
-      { renderType: 'init' },
-      { pending: pendingList, finished: finisehdList }
-    );
-  };
-
-  // returnArrBycurrentOrder = () => {};
-
-  saveState = () => {
-    const pendingLists = selector('#pending-list').children;
-    const finishedLists = selector('#finished-list').children;
-
-    const pendingObjList = [];
-    const finishedObjList = [];
-
-    [...pendingLists].forEach($list => {
-      const id = $list.id;
-      const value = $list.querySelector('span:nth-of-type(2)').innerText;
-      pendingObjList.push({ id, value });
-    });
-
-    [...finishedLists].forEach($list => {
-      const id = $list.id;
-      const value = $list.querySelector('span:nth-of-type(2)').innerText;
-      finishedObjList.push({ id, value });
-    });
-
-    setItem(this.PENDING_LIST_KEYWORD, pendingObjList);
-    setItem(this.FINISHED_LIST_KEYWORD, finishedObjList);
-  };
+  saveState = () => {};
 }
 
-function listObjCreator(value) {
+function idObjCreator(value) {
   return { id: Hash.createHash(Hash.getSalt()), value };
 }
