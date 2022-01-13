@@ -1,32 +1,45 @@
+let dragSrcEl;
+const DRAG_DATA_NAME = 'originalContent';
+
 export function addEventDragAndDrop(el) {
-  el.addEventListner('dragstart', dragStart);
-  el.addEventListner('dragenter', dragEnter);
-  el.addEventListner('dragover', dragOver);
-  el.addEventListner('dragleave', dragLeave);
-  el.addEventListner('drop', dragDrop);
-  el.addEventListner('dragend', dragEnd);
+  el.addEventListener('dragstart', dragStart);
+  el.addEventListener('dragenter', dragEnter);
+  el.addEventListener('dragover', dragOver);
+  el.addEventListener('dragleave', dragLeave);
+  el.addEventListener('drop', dragDrop);
+  el.addEventListener('dragend', dragEnd);
 }
 
-function dragStart() {
-  console.log('dragStart');
+function dragStart(e) {
+  this.style.opacity = 0.4;
+  dragSrcEl = this;
+  const dataObj = { content: this.innerHTML, id: this.id };
+  e.dataTransfer.setData(DRAG_DATA_NAME, JSON.stringify(dataObj));
 }
 
 function dragEnter() {
-  console.log('dragEnter');
+  this.classList.add('over');
 }
 
-function dragOver() {
-  console.log('dragOver');
+function dragOver(e) {
+  e.preventDefault();
 }
 
 function dragLeave() {
-  console.log('dragLeave');
+  this.classList.remove('over');
 }
 
-function dragDrop() {
-  console.log('dragDrop');
+function dragDrop(e) {
+  if (dragSrcEl !== this) {
+    const { content, id } = JSON.parse(e.dataTransfer.getData(DRAG_DATA_NAME));
+    dragSrcEl.innerHTML = this.innerHTML;
+    dragSrcEl.id = this.id;
+    this.innerHTML = content;
+    this.id = id;
+  }
+  this.classList.remove('over');
 }
 
 function dragEnd() {
-  console.log('dragEnd');
+  this.style.opacity = 1;
 }
