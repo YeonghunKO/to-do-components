@@ -120,13 +120,15 @@ export const requestWeather = async (lat, lng) => {
 결론 부터 얘기하자면 컴포넌트 todo가 살짝 더 성능이 좋은것 같았다.
 그러나 제목에(?)를 붙인 이유는 기존 todo도 그다지 나쁘지 않기 때문에 성능에 유의미한 변화가 있다고 하기에는 애매해서 물음표를 붙였다. 일단 gif를 참고하길
 
-기존 todo
+**<<기존 todo>>**
 ![기존 todo](https://github.com/YeonghunKO/for-video-container/blob/master/1todo.gif?raw=true)
 
-컴포넌트 todo
+
+**<<컴포넌트 todo>>**
 ![컴포넌트 todo](https://github.com/YeonghunKO/for-video-container/blob/master/2todo.gif?raw=true)
 
 기존 todo에서 100ms이상 걸린 프레임이 더 많이 발견되는 것을 알 수 있다. 그러나 초록색도 많기 때문에 충분히 쾌적한 환경이라고 할 수 있을 것 같다.
+음... 명령형 프로그래밍이 더 성능면에서 우세할 줄 알았는데 반대의 결과가 나왔다. 선별적 랜더링을 그만큼 잘 했기 때문인가? 아님 template.js를 잘 활용해서?
 
 # 아쉬운 점
 
