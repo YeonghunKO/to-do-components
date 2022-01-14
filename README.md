@@ -41,6 +41,29 @@ https://github.com/YeonghunKO/TO-LIST-ADVANCED/tree/master/src 에 있는 todo l
 
 1. after 가상 선택자를 사용해서 drag me를 구현한것.
 
+    - hover될때 `drag me`가 옆에서 나오면서 투명도가 바뀌게 했다.
+
+```css
+.list li:after {
+  content: '🤏(drag me)';
+  right: 40%;
+  bottom: -25%;
+  height: 22px;
+  font-size: 10px;
+  position: absolute;
+  /* cursor: move; */
+  transition: all 200ms;
+  transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.5);
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+.list li:hover:after {
+  opacity: 1;
+  transform: translate(0);
+}
+```
+
 ## JS
 
 1. 클래스는 생성자 함수와 달리 new 키워드를 붙이지 않으면 시작부터 오류가 발생하기에, `new.target` 이용한 방어코드를 작성할 필요가 없다.
